@@ -63,8 +63,8 @@ const GMAIL_QUERY = [
 
 
 const MATMIDIM_SHIBUTZ = [
-    { day: "שני", start: "19:15", end: "20:00" },
-    { day: "רביעי", start: "19:15", end: "20:00" }
+    { day: "שני", start: "19:00", end: "19:45" },
+    { day: "רביעי", start: "19:00", end: "19:45" }
 ];
 
 const MATMIDIM_PAYMENT = {
