@@ -74,50 +74,6 @@ const MATMIDIM_PAYMENT = {
 // =====================
 //  פונקציות עזר
 // =====================
-//פונקציה לבדיקת כל המיילים עם ההערות ב2 שורות
-function findMailsWithMultilineNotes() {
-
-    const query = [
-        'from:noreply@nedarimplus.com',
-        '"סוג טופס: רישום תלמיד חדש"'
-    ].join(" ");
-
-    const threads = GmailApp.search(query);
-    const results = [];
-
-    threads.forEach(thread => {
-        const msg = thread.getMessages()[0];
-        const body = msg.getPlainBody();
-        const lines = body.split("\n").map(l => l.trim());
-
-        for (let i = 0; i < lines.length - 1; i++) {
-            // מצאנו שורת הערות
-            if (lines[i].startsWith("הערות:")) {
-                const nextLine = lines[i + 1];
-
-                // השורה הבאה קיימת אבל אין בה :
-                if (nextLine && !nextLine.includes(":")) {
-                    results.push({
-                        subject: msg.getSubject(),
-                        snippet: lines[i] + " | " + nextLine
-                    });
-                }
-            }
-        }
-    });
-
-    // הדפסה ללוג
-    if (results.length === 0) {
-        console.log("לא נמצאו מיילים עם הערות רב־שורתיות");
-    } else {
-        console.log("נמצאו מיילים עם הערות רב־שורתיות:");
-        results.forEach(r => {
-            console.log("נושא:", r.subject);
-            console.log("הערות:", r.snippet);
-            console.log("-----");
-        });
-    }
-}
 
 // פונקציה השולחת התראת שגיאה לכל המנהלים
 // @param {string} subject - נושא המייל
