@@ -237,7 +237,7 @@ function extractFields(text) {
             result[currentKey] = rest.join(":").trim();
         }
         // המשך של השדה הקודם (שורה בלי :)
-        else if (currentKey) {
+        else if (currentKey === "הערות") {
             result[currentKey] += "\n" + line;
         }
     });
